@@ -7,7 +7,7 @@ import csv
 from bs4 import BeautifulSoup
 
 GOAL = 'Kevin Bacon'
-LIMIT = 500  # change according to runtime
+LIMIT = 50  # change according to runtime
 
 
 def get_links(goal: str, limit: int) -> None:
@@ -23,10 +23,12 @@ def get_links(goal: str, limit: int) -> None:
     soup = BeautifulSoup(response.content, 'html.parser')
     links = soup.find(id='bodyContent').find_all('a')
 
-    with open('links.csv', 'w', newline='') as file:
+    with open('links.csv', 'w', newline='', encoding="utf-8") as file:
         writer = csv.writer(file)
         for link in links:
-            writer.writerow(link)
+            is_special = 'Special' in link
+            if '/wiki/' in str(link) and goal not in str(link) and not is_special:
+                writer.writerow(link)
 
 
 if __name__ == "__main__":
