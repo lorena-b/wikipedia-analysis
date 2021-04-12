@@ -26,9 +26,14 @@ def get_links(goal: str, limit: int) -> None:
     with open('links.csv', 'w', newline='', encoding="utf-8") as file:
         writer = csv.writer(file)
         for link in links:
-            is_special = 'Special' in link
-            if '/wiki/' in str(link) and goal not in str(link) and not is_special:
+
+            is_special = 'Special' in str(link)
+            is_wiki = '/wiki/' in str(link)
+            is_goal_article = goal in str(link)
+
+            if is_wiki and not is_goal_article and not is_special:
                 writer.writerow(link)
+                print(link)
 
 
 if __name__ == "__main__":
