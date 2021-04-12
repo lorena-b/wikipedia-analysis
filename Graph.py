@@ -3,6 +3,9 @@ Graph Class Implementation - Adapted from CSC111 Course Notes
 """
 from __future__ import annotations
 from typing import Any, Optional
+from data import get_direct_links, GOAL, LIMIT
+
+DEPTH = 6
 
 
 class _Vertex:
@@ -66,3 +69,33 @@ class Graph:
         else:
             # We didn't find an existing vertex for both items.
             raise ValueError
+
+
+def make_graph() -> Graph:
+    """Create a graph with the connections to the goal
+    """
+    g = Graph()
+    g.add_vertex(GOAL)
+
+    direct_links = get_direct_links(GOAL, LIMIT)
+
+    for link in direct_links:
+        g.add_vertex(link)
+        g.add_edge(GOAL, link)
+
+    # need to extend the connections (only has things directly connected to kevin bacon)
+    # maybe recursion needs to be used
+    # should extract article title from URL
+
+    return g
+
+
+if __name__ == "__main__":
+    import python_ta
+    python_ta.check_all(config={
+        'max-line-length': 100,
+        'max-nested-blocks': 4,
+        'disable': ['E1136'],
+        'extra-imports': [],
+        'allowed-io': []
+    })

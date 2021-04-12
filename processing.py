@@ -1,7 +1,6 @@
 """
-
+Analysis Methods
 """
-
 
 if __name__ == "__main__":
     import python_ta

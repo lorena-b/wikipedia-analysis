@@ -1,6 +1,9 @@
 """
-
+Graph Visualization Methods
 """
+import networkx as nx
+from plotly.graph_objs import Scatter, Figure
+import Graph
 
 if __name__ == "__main__":
     import python_ta
