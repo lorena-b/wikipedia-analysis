@@ -3,8 +3,9 @@ Analysis Methods
 """
 from __future__ import annotations
 from typing import Any, Optional
-from Graph import Graph, _Vertex
-from QueueClass import Queue
+from graph import Graph, _Vertex
+from queue_class import Queue
+
 
 # BFS ALGORITHM
 # V1
@@ -50,9 +51,7 @@ from QueueClass import Queue
 #     path = []
 #     for
 
-# v2
-
-
+# V2
 def bfs2(graph: Graph, start: _Vertex, end: _Vertex) -> Any:
     """Preliminary *non-recursive* BFS implementation
     """

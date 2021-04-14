@@ -1,5 +1,5 @@
 """
-Graph Class Implementation - Adapted from CSC111 Course Notes
+Graph Class Implementation - Adapted from CSC111 Course Notes and A3
 """
 from __future__ import annotations
 from typing import Any
@@ -108,11 +108,12 @@ class Graph:
                 nx_graph.add_node(u.item)
 
                 if u.item in nx_graph.nodes:
-                    nx_graph.add_edge(u.item, v.item)
+                    nx_graph.add_edge(u.item, self._vertices[v].item)
 
         return nx_graph
 
 
+# Graph construction functions
 def make_graph() -> Graph:
     """Create a graph with the connections to the goal
     """
