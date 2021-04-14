@@ -58,10 +58,10 @@ def get_direct_links(goal: str, limit: int) -> list:
         is_goal_article = goal in str(link)
 
         if is_wiki and not is_goal_article and not is_special:
-            data.append(link)
+            data.append(link.text)
 
     return data
 
 
 if __name__ == "__main__":
-    get_direct_links(GOAL, LIMIT)
+    get_direct_links_csv(GOAL, LIMIT)

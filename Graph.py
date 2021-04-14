@@ -85,17 +85,22 @@ def make_graph() -> Graph:
 
     # need to extend the connections (only has things directly connected to kevin bacon)
     # maybe recursion needs to be used
-    # should extract article title from URL
 
     return g
 
 
+def extend(graph: Graph, d: int) -> None:
+    """Extend the graph up to a max connection depth of d
+    """
+
+
+
 if __name__ == "__main__":
     import python_ta
-    python_ta.check_all(config={
-        'max-line-length': 100,
-        'max-nested-blocks': 4,
-        'disable': ['E1136'],
-        'extra-imports': [],
-        'allowed-io': []
-    })
+    # python_ta.check_all(config={
+    #     'max-line-length': 100,
+    #     'max-nested-blocks': 4,
+    #     'disable': ['E1136'],
+    #     'extra-imports': [],
+    #     'allowed-io': []
+    # })
