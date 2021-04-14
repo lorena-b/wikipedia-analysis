@@ -3,7 +3,6 @@ Graph Visualization Methods
 """
 import networkx as nx
 from plotly.graph_objs import Figure, Scatter
-from main import GOAL, LIMIT, DEPTH
 
 from graph import Graph, make_graph
 import random
@@ -17,17 +16,17 @@ V_SIZE = 10
 
 
 # Show smallest paths
-def smallest_paths(g: Graph) -> None:
+def smallest_paths(g: Graph, goal: str) -> None:
     """Display a visual of the smallest paths to kevin bacon from a random wikipedia
     article
     """
     random_article = random.choice([v for v in g.get_all_vertices()])
-    path = bfs2(g, random_article, g.get_vertex(GOAL))
+    path = bfs2(g, random_article, g.get_vertex(goal))
     print(path)  # bfs2 doesnt work?
 
 
 # Show whole graph
-def visualize_graph(g: Graph) -> None:
+def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     """Display the graph showing the article links
     Adapted from A3
     """
@@ -39,8 +38,8 @@ def visualize_graph(g: Graph) -> None:
     y_values = [pos[k][1] for k in graph_nx.nodes]
     labels = list(graph_nx.nodes)
 
-    colours = [GOAL_COLOUR if node == GOAL else V_COLOUR for node in graph_nx.nodes]
-    sizes = [GOAL_SIZE if node == GOAL else V_SIZE for node in graph_nx.nodes]
+    colours = [GOAL_COLOUR if node == goal else V_COLOUR for node in graph_nx.nodes]
+    sizes = [GOAL_SIZE if node == goal else V_SIZE for node in graph_nx.nodes]
 
     x_edges = []
     y_edges = []
@@ -72,12 +71,12 @@ def visualize_graph(g: Graph) -> None:
     data1 = [edges, nodes]
     fig = Figure(data=data1)
     fig.update_layout(title=f"Graph displaying "
-                            f"the connections to {GOAL} (limit: {LIMIT}, depth: {DEPTH})")
+                            f"the connections to {goal} (limit: {limit}, depth: {depth})")
     fig.update_layout({'showlegend': False})
     fig.update_xaxes(showgrid=False, zeroline=False, visible=False)
     fig.update_yaxes(showgrid=False, zeroline=False, visible=False)
 
-    fig.show()
+    return fig
 
 
 def connectivity_bar_graph() -> None:
@@ -87,10 +86,10 @@ def connectivity_bar_graph() -> None:
 
 if __name__ == "__main__":
     # test
-    graph = make_graph()
-    # visualize_graph(graph)
-    smallest_paths(graph)
-
+    graph = make_graph('Kevin Bacon', 3, 3)
+    visualize_graph(graph, 'Kevin Bacon', 3, 3)
+    # smallest_paths(graph)
+    import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 100,
     #     'max-nested-blocks': 4,

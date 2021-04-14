@@ -7,7 +7,6 @@ from typing import Any
 import networkx as nx
 
 from data import get_direct_links
-from main import GOAL, LIMIT, DEPTH
 
 
 class _Vertex:
@@ -119,19 +118,21 @@ class Graph:
 
 
 # Graph construction functions
-def make_graph() -> Graph:
+def make_graph(goal: str, limit: int, depth: int) -> Graph:
     """Create a graph with the connections to the goal
     """
+    print('Creating Graph...')
     g = Graph()
-    g.add_vertex(GOAL)
+    g.add_vertex(goal)
 
-    direct_links = get_direct_links(GOAL, LIMIT)
-    extend(g, DEPTH, GOAL, direct_links)
+    direct_links = get_direct_links(goal, limit)
+    extend(g, depth, goal, direct_links, limit)
 
+    print('Graph has been created.')
     return g
 
 
-def extend(graph: Graph, d: int, link: str, link_list: list) -> None:
+def extend(graph: Graph, d: int, link: str, link_list: list, limit: int) -> None:
     """Extend the graph up to a max connection depth of d
     """
     if d == 0:
@@ -142,8 +143,8 @@ def extend(graph: Graph, d: int, link: str, link_list: list) -> None:
                 graph.add_vertex(links)
 
             graph.add_edge(link, links)
-            direct_links = get_direct_links(links, LIMIT)
-            extend(graph, d - 1, links, direct_links)
+            direct_links = get_direct_links(links, limit)
+            extend(graph, d - 1, links, direct_links, limit)
 
 
 if __name__ == "__main__":
