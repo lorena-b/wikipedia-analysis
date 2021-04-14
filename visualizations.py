@@ -2,10 +2,16 @@
 Graph Visualization Methods
 """
 import networkx as nx
-from plotly.graph_objs import Scatter, Figure
-import plotly.graph_objects as go
+from plotly.graph_objs import Figure, Scatter
+from main import GOAL
+
 from graph import Graph, make_graph
-from processing import bfs2
+
+GOAL_COLOUR = 'rgb(255, 0, 0)'
+V_COLOUR = 'rgb(0, 0, 255)'
+
+GOAL_SIZE = 15
+V_SIZE = 10
 
 
 # Show smallest path
@@ -22,11 +28,14 @@ def visualize_graph(g: Graph) -> None:
     """
     graph_nx = g.to_networkx()
 
-    pos = getattr(nx, 'spring_layout')(graph_nx)
+    pos = nx.spring_layout(graph_nx)
 
     x_values = [pos[k][0] for k in graph_nx.nodes]
     y_values = [pos[k][1] for k in graph_nx.nodes]
     labels = list(graph_nx.nodes)
+
+    colours = [GOAL_COLOUR if node == GOAL else V_COLOUR for node in graph_nx.nodes]
+    sizes = [GOAL_SIZE if node == GOAL else V_SIZE for node in graph_nx.nodes]
 
     x_edges = []
     y_edges = []
@@ -34,27 +43,27 @@ def visualize_graph(g: Graph) -> None:
         x_edges += [pos[edge[0]][0], pos[edge[1]][0], None]
         y_edges += [pos[edge[0]][1], pos[edge[1]][1], None]
 
-    trace3 = Scatter(x=x_edges,
-                     y=y_edges,
-                     mode='lines',
-                     name='edges',
-                     line=dict(width=1),
-                     hoverinfo='none',
-                     )
-    trace4 = Scatter(x=x_values,
-                     y=y_values,
-                     mode='markers',
-                     name='nodes',
-                     marker=dict(symbol='circle-dot',
-                                 size=5,
-                                 line=dict(width=0.5)
-                                 ),
-                     text=labels,
-                     hovertemplate='%{text}',
-                     hoverlabel={'namelength': 0}
-                     )
+    edges = Scatter(x=x_edges,
+                    y=y_edges,
+                    mode='lines',
+                    name='edges',
+                    line=dict(color='rgb(0, 0, 0)', width=1),
+                    hoverinfo='none',
+                    )
+    nodes = Scatter(x=x_values,
+                    y=y_values,
+                    mode='markers',
+                    name='nodes',
+                    marker=dict(symbol='circle-dot',
+                                size=sizes,
+                                line=dict(width=0.5),
+                                color=colours),
+                    text=labels,
+                    hovertemplate='%{text}',
+                    hoverlabel={'namelength': 0}
+                    )
 
-    data1 = [trace3, trace4]
+    data1 = [edges, nodes]
     fig = Figure(data=data1)
     fig.update_layout({'showlegend': False})
     fig.update_xaxes(showgrid=False, zeroline=False, visible=False)
@@ -72,7 +81,6 @@ if __name__ == "__main__":
     # test
     graph = make_graph()
     visualize_graph(graph)
-    import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 100,
     #     'max-nested-blocks': 4,

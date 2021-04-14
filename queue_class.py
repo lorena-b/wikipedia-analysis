@@ -1,5 +1,5 @@
 """
-Queue Class Implementation
+Queue Class Implementation - Adapted from CSC110 course notes
 """
 from typing import Any, Optional
 
