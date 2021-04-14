@@ -4,8 +4,7 @@ Analysis Methods
 from __future__ import annotations
 from typing import Any, Optional
 from Graph import Graph, _Vertex
-from Queue import Queue
-
+from QueueClass import Queue
 
 # BFS ALGORITHM
 # V1

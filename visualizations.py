@@ -3,7 +3,7 @@ Graph Visualization Methods
 """
 import networkx as nx
 from plotly.graph_objs import Scatter, Figure
-import Graph
+from Graph import Graph
 
 
 # Show smallest path
@@ -14,9 +14,13 @@ def smallest_path() -> None:
 
 
 # Show whole graph
-def visualize_graph() -> None:
+def visualize_graph(g: Graph) -> None:
     """Display the graph showing the article links
     """
+    nx_graph = g.to_networkx()
+
+
+
 
 
 if __name__ == "__main__":

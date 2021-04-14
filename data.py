@@ -30,7 +30,6 @@ def get_direct_links_csv(goal: str, limit: int) -> None:
 
             if is_wiki and not is_goal_article and not is_special:
                 writer.writerow(link)
-                print(link)
 
 
 def get_direct_links(goal: str, limit: int) -> list:
