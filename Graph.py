@@ -13,11 +13,9 @@ DEPTH = 6
 
 class _Vertex:
     """A vertex in a graph.
-
     Instance Attributes:
         - item: The data stored in this vertex.
         - neighbours: The vertices that are adjacent to this vertex.
-
     Preconditions:
         - self not in self.neighbours
         - all(self in n.neighbours for n in self.neighbours)
@@ -46,9 +44,7 @@ class Graph:
 
     def add_vertex(self, item: Any) -> None:
         """Add a vertex with the given item to this graph.
-
         The new vertex is not adjacent to any other vertices.
-
         Preconditions:
             - item not in self._vertices
         """
@@ -56,9 +52,7 @@ class Graph:
 
     def add_edge(self, item1: Any, item2: Any) -> None:
         """Add an edge between the two vertices with the given items in this graph.
-
         Raise a ValueError if item1 or item2 do not appear as vertices in this graph.
-
         Preconditions:
             - item1 != item2
         """
@@ -72,6 +66,43 @@ class Graph:
         else:
             # We didn't find an existing vertex for both items.
             raise ValueError
+
+    def adjacent(self, item1: Any, item2: Any) -> bool:
+        """Return whether item1 and item2 are adjacent vertices in this graph.
+
+        Return False if item1 or item2 do not appear as vertices in this graph.
+        """
+        if item1 in self._vertices and item2 in self._vertices:
+            v1 = self._vertices[item1]
+            return any(v2.item == item2 for v2 in v1.neighbours)
+        else:
+            return False
+
+    def get_neighbours(self, item: Any) -> set:
+        """Return a set of the neighbours of the given item.
+
+        Note that the *items* are returned, not the _Vertex objects themselves.
+
+        Raise a ValueError if item does not appear as a vertex in this graph.
+        """
+        if item in self._vertices:
+            v = self._vertices[item]
+            return {neighbour.item for neighbour in v.neighbours}
+        else:
+            raise ValueError
+
+    def get_all_vertices(self, kind: str = '') -> set:
+        """Return a set of all vertex items in this graph.
+
+        If kind != '', only return the items of the given vertex kind.
+
+        Preconditions:
+            - kind in {'', 'user', 'book'}
+        """
+        if kind != '':
+            return {v.item for v in self._vertices.values()}
+        else:
+            return set(self._vertices.keys())
 
     def to_networkx(self) -> nx.Graph:
         """Convert the graph into an nx.graph object to use
@@ -98,10 +129,12 @@ def make_graph() -> Graph:
     g.add_vertex(GOAL)
 
     direct_links = get_direct_links(GOAL, LIMIT)
+    extend(g, 2, GOAL, direct_links)
 
-    for link in direct_links:
-        g.add_vertex(link)
-        g.add_edge(GOAL, link)
+    #  for link in direct_links:
+    #      g.add_vertex(link)
+    #      g.add_edge(GOAL, link)
+    #      extend(g, 1, link)
 
     # need to extend the connections (only has things directly connected to kevin bacon)
     # maybe recursion needs to be used
@@ -109,9 +142,19 @@ def make_graph() -> Graph:
     return g
 
 
-def extend(graph: Graph, d: int, link: str) -> None:
+def extend(graph: Graph, d: int, link: str, link_list: list) -> None:
     """Extend the graph up to a max connection depth of d
     """
+    if d == 0:
+        pass
+    else:
+        for links in link_list:
+            graph.add_vertex(links)
+            graph.add_edge(link, links)
+            direct_links = get_direct_links(links, 10)
+            extend(graph, d - 1, links, direct_links)
+
+
 
 
 if __name__ == "__main__":
