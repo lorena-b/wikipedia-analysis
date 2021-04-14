@@ -6,6 +6,14 @@ from plotly.graph_objs import Scatter, Figure
 import Graph
 
 
+# Show smallest path
+def smallest_path() -> None:
+    """Display a tree of the smallest path to kevin bacon from a random wikipedia
+    article
+    """
+
+
+# Show whole graph
 def visualize_graph() -> None:
     """Display the graph showing the article links
     """

@@ -2,7 +2,10 @@
 Graph Class Implementation - Adapted from CSC111 Course Notes
 """
 from __future__ import annotations
-from typing import Any, Optional
+from typing import Any
+
+import networkx as nx
+
 from data import get_direct_links, GOAL, LIMIT
 
 DEPTH = 6
@@ -70,6 +73,23 @@ class Graph:
             # We didn't find an existing vertex for both items.
             raise ValueError
 
+    def to_networkx(self) -> nx.Graph:
+        """Convert the graph into an nx.graph object to use
+        for plotly visualization
+        """
+        nx_graph = nx.Graph()
+
+        for v in self._vertices:
+            nx_graph.add_node(self._vertices[v].item)
+
+            for u in self._vertices[v].neighbours:
+                nx_graph.add_node(u.item)
+
+                if u.item in nx_graph.nodes:
+                    nx_graph.add_edge(u.item, v.item)
+
+        return nx_graph
+
 
 def make_graph() -> Graph:
     """Create a graph with the connections to the goal
@@ -89,10 +109,9 @@ def make_graph() -> Graph:
     return g
 
 
-def extend(graph: Graph, d: int) -> None:
+def extend(graph: Graph, d: int, link: str) -> None:
     """Extend the graph up to a max connection depth of d
     """
-
 
 
 if __name__ == "__main__":
