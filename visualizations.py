@@ -3,9 +3,11 @@ Graph Visualization Methods
 """
 import networkx as nx
 from plotly.graph_objs import Figure, Scatter
-from main import GOAL
+from main import GOAL, LIMIT, DEPTH
 
 from graph import Graph, make_graph
+import random
+from processing import bfs2
 
 GOAL_COLOUR = 'rgb(255, 0, 0)'
 V_COLOUR = 'rgb(0, 0, 255)'
@@ -14,11 +16,14 @@ GOAL_SIZE = 15
 V_SIZE = 10
 
 
-# Show smallest path
-def smallest_path() -> None:
-    """Display a tree of the smallest path to kevin bacon from a random wikipedia
+# Show smallest paths
+def smallest_paths(g: Graph) -> None:
+    """Display a visual of the smallest paths to kevin bacon from a random wikipedia
     article
     """
+    random_article = random.choice([v for v in g.get_all_vertices()])
+    path = bfs2(g, random_article, g.get_vertex(GOAL))
+    print(path)  # bfs2 doesnt work?
 
 
 # Show whole graph
@@ -57,7 +62,8 @@ def visualize_graph(g: Graph) -> None:
                     marker=dict(symbol='circle-dot',
                                 size=sizes,
                                 line=dict(width=0.5),
-                                color=colours),
+                                color=colours,
+                                opacity=1),
                     text=labels,
                     hovertemplate='%{text}',
                     hoverlabel={'namelength': 0}
@@ -65,6 +71,8 @@ def visualize_graph(g: Graph) -> None:
 
     data1 = [edges, nodes]
     fig = Figure(data=data1)
+    fig.update_layout(title=f"Graph displaying "
+                            f"the connections to {GOAL} (limit: {LIMIT}, depth: {DEPTH})")
     fig.update_layout({'showlegend': False})
     fig.update_xaxes(showgrid=False, zeroline=False, visible=False)
     fig.update_yaxes(showgrid=False, zeroline=False, visible=False)
@@ -80,7 +88,9 @@ def connectivity_bar_graph() -> None:
 if __name__ == "__main__":
     # test
     graph = make_graph()
-    visualize_graph(graph)
+    # visualize_graph(graph)
+    smallest_paths(graph)
+
     # python_ta.check_all(config={
     #     'max-line-length': 100,
     #     'max-nested-blocks': 4,

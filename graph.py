@@ -112,6 +112,11 @@ class Graph:
 
         return nx_graph
 
+    def get_vertex(self, goal: Any):
+        """Return the specified vertex object
+        """
+        return self._vertices[goal]
+
 
 # Graph construction functions
 def make_graph() -> Graph:
