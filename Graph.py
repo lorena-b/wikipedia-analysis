@@ -6,9 +6,8 @@ from typing import Any
 
 import networkx as nx
 
-from data import get_direct_links, GOAL, LIMIT
-
-DEPTH = 6
+from data import get_direct_links
+from main import GOAL, LIMIT, DEPTH
 
 
 class _Vertex:
@@ -91,18 +90,10 @@ class Graph:
         else:
             raise ValueError
 
-    def get_all_vertices(self, kind: str = '') -> set:
+    def get_all_vertices(self) -> set:
         """Return a set of all vertex items in this graph.
-
-        If kind != '', only return the items of the given vertex kind.
-
-        Preconditions:
-            - kind in {'', 'user', 'book'}
         """
-        if kind != '':
-            return {v.item for v in self._vertices.values()}
-        else:
-            return set(self._vertices.keys())
+        return set(self._vertices.keys())
 
     def to_networkx(self) -> nx.Graph:
         """Convert the graph into an nx.graph object to use
@@ -129,15 +120,7 @@ def make_graph() -> Graph:
     g.add_vertex(GOAL)
 
     direct_links = get_direct_links(GOAL, LIMIT)
-    extend(g, 2, GOAL, direct_links)
-
-    #  for link in direct_links:
-    #      g.add_vertex(link)
-    #      g.add_edge(GOAL, link)
-    #      extend(g, 1, link)
-
-    # need to extend the connections (only has things directly connected to kevin bacon)
-    # maybe recursion needs to be used
+    extend(g, DEPTH, GOAL, direct_links)
 
     return g
 
@@ -149,12 +132,12 @@ def extend(graph: Graph, d: int, link: str, link_list: list) -> None:
         pass
     else:
         for links in link_list:
-            graph.add_vertex(links)
+            if links not in graph.get_all_vertices():
+                graph.add_vertex(links)
+
             graph.add_edge(link, links)
-            direct_links = get_direct_links(links, 10)
+            direct_links = get_direct_links(links, LIMIT)
             extend(graph, d - 1, links, direct_links)
-
-
 
 
 if __name__ == "__main__":

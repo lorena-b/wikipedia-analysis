@@ -3,9 +3,10 @@ Graph Class Implementation - Adapted from CSC111 Course Notes
 """
 from __future__ import annotations
 from typing import Any, Optional
-from data import get_direct_links, GOAL, LIMIT
+from data import get_direct_links
 
-DEPTH = 6
+from main import GOAL, LIMIT
+
 
 class Queue:
     """A first-in-first-out (FIFO) queue of items.
@@ -55,6 +56,7 @@ class Queue:
             raise EmptyQueueError
         else:
             return self._items.pop(0)
+
 
 class EmptyQueueError(Exception):
     """Exception raised when calling dequeue on an empty queue."""
@@ -160,6 +162,7 @@ def make_graph() -> Graph:
     # maybe recursion needs to be used
 
     return g
+
 
 # V1
 

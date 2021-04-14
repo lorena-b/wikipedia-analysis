@@ -1,13 +1,10 @@
 """
-File for scraping wikipedia data to locate the links to Kevin Bacon
+File for scraping wikipedia data to retrieve the articles directly linked to the goal article
 Copyright
 """
 import requests
 import csv
 from bs4 import BeautifulSoup
-
-GOAL = 'Kevin Bacon'
-LIMIT = 50  # change according to runtime
 
 
 def get_direct_links_csv(goal: str, limit: int) -> None:
@@ -61,7 +58,3 @@ def get_direct_links(goal: str, limit: int) -> list:
             data.append(link.text)
 
     return data
-
-
-if __name__ == "__main__":
-    get_direct_links_csv(GOAL, LIMIT)
