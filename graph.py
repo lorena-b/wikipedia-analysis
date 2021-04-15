@@ -4,6 +4,8 @@ Graph Class Implementation and construction functions
 This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 """
 from __future__ import annotations
+
+import csv
 from typing import Any
 
 import networkx as nx
@@ -148,16 +150,18 @@ def extend(graph: Graph, d: int, link: str, link_list: list, limit: int) -> None
             graph.add_edge(link, links)
             direct_links = get_direct_links(links, limit)
             extend(graph, d - 1, links, direct_links, limit)
- 
+
+
 def make_graph_csv(graph: Graph) -> None:
     """Make a csv file for the graph
     """
     vertices = graph.get_all_vertices()
     with open('graph_data.csv', 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["Articletitle", "Anchors"])
+        writer.writerow(["ArticleTitle", "Anchors"])
         for page in vertices:
-            writer.writerow([page] + list(linked.item for linked in graph._vertices[page].neighbours))
+            writer.writerow(
+                [page] + list(linked.item for linked in graph.get_vertex(page).neighbours))
 
 
 if __name__ == "__main__":
