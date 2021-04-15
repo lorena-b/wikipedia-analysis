@@ -33,7 +33,7 @@ def read_csv_data(filepath: str) -> dict[str, list[str]]:
 
         dict_so_far = {}
         for row in reader:
-            dict_so_far[row[0]] = row[1].split(',')  # row[0] not in dict_so_far, from precondition
+            dict_so_far[row[0]] = row[1].split(', ')  # row[0] not in dict_so_far, from precondition
     return dict_so_far
 
 
