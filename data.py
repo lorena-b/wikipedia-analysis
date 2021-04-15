@@ -40,7 +40,7 @@ def get_direct_links(goal: str, limit: int) -> list:
         url='https://en.wikipedia.org/w/index.php?title=Special%3AWhatLinksHere&' +
             'limit=' + str(limit) + '&target=' + goal + '&namespace='
     )
-    print(response.status_code)
+    # print(response.status_code)
 
     soup = BeautifulSoup(response.content, 'html.parser')
     links = soup.find(id='bodyContent').find_all('a')

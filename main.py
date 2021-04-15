@@ -42,6 +42,7 @@ app.layout = html.Div([
         children=[
             dcc.Graph(
                 id='right-top-graph',
+                style={'width': '90vh', 'height': '80vh'},
                 figure=visualize_graph(graph, GOAL, LIMIT, DEPTH)
             ),
         ]
