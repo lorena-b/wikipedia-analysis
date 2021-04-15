@@ -65,13 +65,12 @@ app.layout = html.Div([
             html.Div(
                 className="six columns",
                 children=html.Div([
-                    html.Button('Update Graph', id='btn-1', n_clicks=0),
+                    html.Button('Update Graph', id='button', n_clicks=0),
                     dcc.Graph(
-                        id='right-graph',
-                        figure=smallest_path(GOAL, CSV_NAME)
+                        id='smallest-graph'
                     ),
                     dcc.Graph(
-                        id='right-bottom-graph',
+                        id='bar-graph',
                         figure=visualize_graph(graph, GOAL, LIMIT, DEPTH)
                     ),
                 ], style={"maxHeight": "800px", "overflow": "scroll"})
@@ -82,12 +81,11 @@ app.layout = html.Div([
 ])
 
 
-@app.callback(Output('graph', 'figure'), [Input('button', 'n_clicks')])
+@app.callback(Output('smallest-graph', 'figure'), [Input('button', 'n_clicks')])
 def update_fig(n_clicks) -> any:
     """Update the graph by selecting a new random article to show the shortest path
     """
-    if n_clicks > 0:
-        return smallest_path(GOAL, CSV_NAME)
+    return smallest_path(GOAL, CSV_NAME)
 
 
 if __name__ == '__main__':
