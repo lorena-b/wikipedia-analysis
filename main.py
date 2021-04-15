@@ -12,7 +12,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from graph import make_graph, make_graph_csv
-from visualizations import visualize_graph
+from visualizations import visualize_graph, smallest_paths, connectivity_bar_graph
 
 # CONSTANTS
 GOAL = 'Kevin Bacon'
@@ -49,11 +49,24 @@ app.layout = html.Div([
     html.Div(
         className="row",
         children=[
-            dcc.Graph(
-                id='right-top-graph',
-                style={'width': '90vh', 'height': '80vh'},
-                figure=visualize_graph(graph, GOAL, LIMIT, DEPTH)
-            ),
+            html.Div(
+                className="six columns",
+                children=html.Div([
+                    dcc.Graph(
+                        id='right-top-graph',
+                        style={'width': '90vh', 'height': '80vh'},
+                        figure=visualize_graph(graph, GOAL, LIMIT, DEPTH)
+                    ),
+                    dcc.Graph(
+                        id='right-graph',
+                        figure=visualize_graph(graph, GOAL, LIMIT, DEPTH)
+                    ),
+                    dcc.Graph(
+                        id='right-bottom-graph',
+                        figure=visualize_graph(graph, GOAL, LIMIT, DEPTH)
+                    ),
+                ], style={"maxHeight": "800px", "overflow": "scroll"})
+            )
         ]
     )
 
