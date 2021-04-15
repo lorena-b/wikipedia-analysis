@@ -1,5 +1,5 @@
 """
-Graph Class Implementation - Adapted from CSC111 Course Notes and A3
+Graph Class Implementation and construction functions
 """
 from __future__ import annotations
 from typing import Any
@@ -9,6 +9,7 @@ import networkx as nx
 from data import get_direct_links
 
 
+# Classes Adapted from CSC111 Course Notes and A3
 class _Vertex:
     """A vertex in a graph.
     Instance Attributes:
