@@ -30,7 +30,7 @@ app = dash.Dash(__name__,
                 external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    html.H1(children="Wikipedia Network Analysis: 6 degrees to Kevin Bacon",
+    html.H1(children=f"Wikipedia Network Analysis: 6 degrees to {GOAL}",
             style={
                 'fontSize': 28,
                 'paddingTop': 20,
