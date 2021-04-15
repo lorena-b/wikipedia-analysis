@@ -11,8 +11,10 @@ This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output
+
 from graph import make_graph, make_graph_csv
-from visualizations import visualize_graph, smallest_paths, connectivity_bar_graph
+from visualizations import visualize_graph, smallest_path, connectivity_bar_graph
 
 # CONSTANTS
 GOAL = 'Kevin Bacon'
@@ -57,6 +59,12 @@ app.layout = html.Div([
                         style={'width': '90vh', 'height': '80vh'},
                         figure=visualize_graph(graph, GOAL, LIMIT, DEPTH)
                     ),
+                ])
+            ),
+            html.Div(
+                className="six columns",
+                children=html.Div([
+                    html.Button('Update Graph', id='btn-1', n_clicks=0),
                     dcc.Graph(
                         id='right-graph',
                         figure=visualize_graph(graph, GOAL, LIMIT, DEPTH)
@@ -72,8 +80,13 @@ app.layout = html.Div([
 
 ])
 
-# update graph function (button on click will generate a new shortest path graph with a new
-# random start point)
+
+@app.callback(Output('graph', 'figure'), [Input('button', 'n_clicks')])
+def update_fig() -> any:
+    """Update the graph by selecting a new random article to show the shortest path
+    """
+    return visualize_graph(graph, GOAL, LIMIT, DEPTH)
+
 
 if __name__ == '__main__':
     app.run_server(debug=True, use_reloader=False)

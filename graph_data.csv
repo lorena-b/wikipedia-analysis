@@ -1,23 +1,23 @@
 ArticleTitle,Anchors
-April,['August 4']
-Apollo 8,"['Apollo 13', 'Astronaut', 'Apollo 11']"
-Anthony Hopkins,"['Alfred Hitchcock', 'Billy Bob Thornton', 'Albert Brooks']"
-Apollo 13,"['Astronaut', 'Kevin Bacon', 'Apollo 8', 'Apollo 11']"
-Billy Bob Thornton,"['August 4', 'Anthony Hopkins', 'Kevin Bacon', 'Arkansas']"
-Bruce Campbell,"['Army of Darkness', 'The Evil Dead', 'Kevin Bacon']"
-Arkansas,"['Andrew Jackson', 'Alabama', 'Alaska', 'Billy Bob Thornton']"
-August 4,"['April 6', 'August', 'April', 'Billy Bob Thornton']"
-Kevin Bacon,"['Apollo 13', 'Bruce Campbell', 'Billy Bob Thornton']"
-August,['August 4']
-Albert Brooks,['Anthony Hopkins']
-Comedy film,['The Evil Dead']
-Andrew Jackson,['Arkansas']
-April 6,['August 4']
-Army of Darkness,"['Bruce Campbell', 'The Evil Dead']"
-The Evil Dead,"['Army of Darkness', 'Bruce Campbell', 'Comedy film']"
-Alaska,['Arkansas']
-August 13,['Apollo 11']
-Alabama,['Arkansas']
-Alfred Hitchcock,['Anthony Hopkins']
-Astronaut,"['Apollo 13', 'Apollo 8', 'Apollo 11']"
-Apollo 11,"['Apollo 13', 'Astronaut', 'Apollo 8', 'August 13']"
+Albert Brooks,"Anthony Hopkins"
+Alfred Hitchcock,"Anthony Hopkins"
+April,"August 4"
+Andrew Jackson,"Arkansas"
+August,"August 4"
+Alabama,"Arkansas"
+Astronaut,"Apollo 11, Apollo 8, Apollo 13"
+August 4,"Billy Bob Thornton, April 6, August, April"
+Arkansas,"Billy Bob Thornton, Andrew Jackson, Alabama, Alaska"
+The Evil Dead,"Army of Darkness, Bruce Campbell, Comedy film"
+Kevin Bacon,"Billy Bob Thornton, Bruce Campbell, Apollo 13"
+Comedy film,"The Evil Dead"
+Army of Darkness,"Bruce Campbell, The Evil Dead"
+August 13,"Apollo 11"
+April 6,"August 4"
+Apollo 13,"Apollo 11, Apollo 8, Kevin Bacon, Astronaut"
+Apollo 11,"August 13, Apollo 8, Apollo 13, Astronaut"
+Billy Bob Thornton,"Anthony Hopkins, Kevin Bacon, August 4, Arkansas"
+Anthony Hopkins,"Billy Bob Thornton, Alfred Hitchcock, Albert Brooks"
+Alaska,"Arkansas"
+Apollo 8,"Apollo 11, Apollo 13, Astronaut"
+Bruce Campbell,"Army of Darkness, Kevin Bacon, The Evil Dead"

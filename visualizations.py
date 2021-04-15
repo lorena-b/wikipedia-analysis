@@ -18,7 +18,7 @@ V_SIZE = 10
 
 
 # Show smallest path
-def smallest_paths(goal: str, csv: str) -> Figure:
+def smallest_path(goal: str, csv: str) -> Figure:
     """Display a visual of the smallest path to kevin bacon from a random wikipedia
     article
     Adapted from A3
@@ -142,7 +142,7 @@ if __name__ == "__main__":
     # test
     graph = make_graph('Kevin Bacon', 3, 3)
     visualize_graph(graph, 'Kevin Bacon', 3, 3)
-    smallest_paths('Kevin Bacon', 'graph_data.csv')
+    smallest_path('Kevin Bacon', 'graph_data.csv')
     import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 100,
