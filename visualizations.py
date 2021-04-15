@@ -1,13 +1,14 @@
-"""
-Visualization Methods
+"""CSC111 Winter 2021 Final Project: Data Visualization
 
-This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
+This file contains any code needed to visualize the formatted and processed data.
+
+This file is Copyright (c) 2021 Aidan Ryan, Lorena Buciu, Kevin Yang, Kuan-Lin Kuo.
 """
+import random
 import networkx as nx
 from plotly.graph_objs import Figure, Scatter
 
 from graph import Graph
-import random
 from processing import bfs_record, read_csv_data, create_wiki_graph
 
 GOAL_COLOUR = 'rgb(255, 0, 0)'
@@ -21,7 +22,6 @@ V_SIZE = 10
 def smallest_path(goal: str, csv: str) -> Figure:
     """Display a visual of the smallest path to kevin bacon from a random wikipedia
     article
-    Adapted from A3
     """
     data = read_csv_data(csv)
     g = create_wiki_graph(data)
@@ -29,7 +29,7 @@ def smallest_path(goal: str, csv: str) -> Figure:
 
     pos = nx.spring_layout(graph_nx)
 
-    start = random.choice([v for v in g.get_all_vertices()])
+    start = random.choice(g.get_all_vertices())
     shortest_path = bfs_record(g, start, target=goal)
 
     x_values = [pos[k][0] for k in graph_nx.nodes]
@@ -79,10 +79,14 @@ def smallest_path(goal: str, csv: str) -> Figure:
     return fig
 
 
-# Show whole graph
+# Show whole graph, only used for testing
 def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     """Display the graph showing the article links
-    Adapted from A3
+    Adapted from A3.
+
+    Preconditions:
+        - limit > 0
+        - depth > 0
     """
     graph_nx = g.to_networkx()
 
@@ -140,10 +144,10 @@ def connectivity_bar_graph() -> Figure:
 
 if __name__ == "__main__":
     import python_ta
-    # python_ta.check_all(config={
-    #     'max-line-length': 100,
-    #     'max-nested-blocks': 4,
-    #     'disable': ['E1136'],
-    #     'extra-imports': [],
-    #     'allowed-io': []
-    # })
+    python_ta.check_all(config={
+        'max-line-length': 100,
+        'max-nested-blocks': 4,
+        'disable': ['E1136'],
+        'extra-imports': ['networkx', 'plotly.graph_objs', 'graph', 'random', 'processing'],
+        'allowed-io': []
+    })
