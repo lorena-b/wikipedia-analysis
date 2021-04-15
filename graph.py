@@ -164,12 +164,24 @@ def make_graph_csv(graph: Graph) -> None:
     """Make a csv file for the graph
     """
     vertices = graph.get_all_vertices()
+    row_list = []
     with open('graph_data.csv', 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["ArticleTitle", "Anchors"])
+        writer = csv.writer(file, escapechar='.', quoting=csv.QUOTE_NONE)
+        writer.writerow(["Articletitle", "Anchors"])
+
         for page in vertices:
-            writer.writerow(
-                [page] + list(linked.item for linked in graph.get_vertex(page).neighbours))
+            data = '"' + str([linked.item for linked in graph._vertices[page].neighbours]) + '"'
+            data = data.replace('[', '')
+            data = data.replace(']', '')
+            data = data.replace("'", '')
+            print([page] + [data])
+            writer.writerow([page] + [data])
+        print(row_list)
+    replace = open('graph_data.csv', 'r')
+    replace = ''.join([i for i in replace]).replace('.', '')
+    x = open('graph_data.csv', 'w')
+    x.writelines(replace)
+    x.close()
 
 
 if __name__ == "__main__":
