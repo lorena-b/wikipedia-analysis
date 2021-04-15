@@ -97,7 +97,7 @@ class Graph:
         else:
             raise ValueError
 
-    def get_all_vertices(self) -> set:
+    def get_all_vertices(self) -> list:
         """Return a set of all vertex items in this graph.
         """
         return list(self._vertices.keys())
@@ -167,7 +167,6 @@ def make_graph_csv(graph: Graph) -> None:
     """Make a csv file for the graph
     """
     vertices = graph.get_all_vertices()
-    row_list = []
     with open('graph_data.csv', 'w', newline='') as file:
         writer = csv.writer(file, escapechar='.', quoting=csv.QUOTE_NONE)
         writer.writerow(["ArticleTitle", "Anchors"])
@@ -177,9 +176,7 @@ def make_graph_csv(graph: Graph) -> None:
             data = data.replace('[', '')
             data = data.replace(']', '')
             data = data.replace("'", '')
-            print([page] + [data])
             writer.writerow([page] + [data])
-        print(row_list)
 
     replace = open('graph_data.csv', 'r')
     replace = ''.join([i for i in replace]).replace('.', '')

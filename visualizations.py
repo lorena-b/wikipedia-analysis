@@ -16,6 +16,9 @@ V_COLOUR = 'rgb(0, 0, 255)'
 GOAL_SIZE = 15
 V_SIZE = 10
 
+EDGE_COLOUR = 'rgb(0, 0, 0)'
+SHORT = 'rgb(255, 0, 0)'
+
 
 # Show smallest path
 def smallest_path(goal: str, csv: str) -> Figure:
@@ -37,7 +40,9 @@ def smallest_path(goal: str, csv: str) -> Figure:
     labels = list(graph_nx.nodes)
 
     colours = [GOAL_COLOUR if node in shortest_path else V_COLOUR for node in graph_nx.nodes]
-    sizes = [GOAL_SIZE if node == goal else V_SIZE for node in graph_nx.nodes]
+    sizes = [GOAL_SIZE if node == goal or node in shortest_path else V_SIZE
+             for node in graph_nx.nodes]
+    # edge_colours = [EDGE_COLOUR if ]
 
     x_edges = []
     y_edges = []
@@ -49,7 +54,7 @@ def smallest_path(goal: str, csv: str) -> Figure:
                     y=y_edges,
                     mode='lines',
                     name='edges',
-                    line=dict(color='rgb(0, 0, 0)', width=1),
+                    line=dict(color=EDGE_COLOUR, width=1),
                     hoverinfo='none',
                     )
     nodes = Scatter(x=x_values,
@@ -68,13 +73,11 @@ def smallest_path(goal: str, csv: str) -> Figure:
 
     data1 = [edges, nodes]
     fig = Figure(data=data1)
-    fig.update_layout(title=f"Graph displaying "
-                            f"the shortest path to {goal} from {start}")
+    fig.update_layout(title=f"Graph displaying one of "
+                            f"the shortest paths to {goal} from {start}")
     fig.update_layout({'showlegend': False})
     fig.update_xaxes(showgrid=False, zeroline=False, visible=False)
     fig.update_yaxes(showgrid=False, zeroline=False, visible=False)
-
-    fig.show()
 
     return fig
 

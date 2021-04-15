@@ -20,6 +20,7 @@ from visualizations import visualize_graph, smallest_path, connectivity_bar_grap
 GOAL = 'Kevin Bacon'
 LIMIT = 3  # How many directly connected articles to get per goal
 DEPTH = 3  # Max depth for the article connections
+CSV_NAME = 'graph_data.csv'
 
 # CREATE THE GRAPH
 graph = make_graph(GOAL, LIMIT, DEPTH)
@@ -67,7 +68,7 @@ app.layout = html.Div([
                     html.Button('Update Graph', id='btn-1', n_clicks=0),
                     dcc.Graph(
                         id='right-graph',
-                        figure=visualize_graph(graph, GOAL, LIMIT, DEPTH)
+                        figure=smallest_path(GOAL, CSV_NAME)
                     ),
                     dcc.Graph(
                         id='right-bottom-graph',
@@ -82,10 +83,11 @@ app.layout = html.Div([
 
 
 @app.callback(Output('graph', 'figure'), [Input('button', 'n_clicks')])
-def update_fig() -> any:
+def update_fig(n_clicks) -> any:
     """Update the graph by selecting a new random article to show the shortest path
     """
-    return visualize_graph(graph, GOAL, LIMIT, DEPTH)
+    if n_clicks > 0:
+        return smallest_path(GOAL, CSV_NAME)
 
 
 if __name__ == '__main__':
