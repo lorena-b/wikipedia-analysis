@@ -1,6 +1,7 @@
 """
 File for scraping wikipedia data to retrieve the articles directly linked to the goal article
-Copyright
+
+This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 """
 import requests
 import csv

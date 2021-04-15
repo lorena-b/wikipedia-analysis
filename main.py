@@ -1,5 +1,12 @@
 """
-Main File
+CSC111 Final Project - Analyzing Wikipedia Connectivity to Kevin Bacon
+
+This is the main module, it will:
+    - Create the network graph
+    - Perform computations on the graph
+    - Produce a Dash webpage output of the visualizations
+
+This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 """
 import dash
 import dash_core_components as dcc

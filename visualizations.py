@@ -1,5 +1,7 @@
 """
-Graph Visualization Methods
+Visualization Methods
+
+This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 """
 import networkx as nx
 from plotly.graph_objs import Figure, Scatter

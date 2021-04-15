@@ -1,5 +1,7 @@
 """
-Analysis Methods
+Data Processing Methods
+
+This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 """
 from __future__ import annotations
 from typing import Any
