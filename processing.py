@@ -57,7 +57,8 @@ def bfs_record(graph: Graph, start: str, target: str, depth_cap: int = 6) -> lis
     """Returns a list representing the shortest path found by breadth first search algorithm,
      in order. This implementation is iterative, not recursive, as it better facilitates
      this path tracing.
-
+     Accepts a depth_cap argument that sets a limit for how deep the algorithm searches for
+     connections. Runtimes seem fine without a cap, but this should help with much denser data.
 
     Preconditions:
         - start in graph.get_all_vertices
@@ -65,9 +66,9 @@ def bfs_record(graph: Graph, start: str, target: str, depth_cap: int = 6) -> lis
     """
     queue = [(start, [start])]
     visited = set()
-    depth = 0
+    path = []
 
-    while depth < depth_cap and queue:
+    while len(path) <= depth_cap and queue:
         article, path = queue.pop(0)
         visited.add(article)
         for connected_article in graph.get_neighbours(article):
@@ -77,10 +78,8 @@ def bfs_record(graph: Graph, start: str, target: str, depth_cap: int = 6) -> lis
                 visited.add(connected_article)
                 queue.append((connected_article, path + [connected_article]))
             else:
-                depth += 1
-                print(depth)
+                pass
     return []  # occurs when no path is reached before hitting depth cap
-#  Something about this depth cap doesn't work, still figuring it out
 
 
 if __name__ == '__main__':
