@@ -6,7 +6,7 @@ This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 import networkx as nx
 from plotly.graph_objs import Figure, Scatter
 
-from graph import Graph, make_graph
+from graph import Graph
 import random
 from processing import bfs_record, read_csv_data, create_wiki_graph
 
@@ -15,9 +15,6 @@ V_COLOUR = 'rgb(0, 0, 255)'
 
 GOAL_SIZE = 15
 V_SIZE = 10
-
-EDGE_COLOUR = 'rgb(0, 0, 0)'
-SHORT = 'rgb(255, 0, 0)'
 
 
 # Show smallest path
@@ -42,7 +39,6 @@ def smallest_path(goal: str, csv: str) -> Figure:
     colours = [GOAL_COLOUR if node in shortest_path else V_COLOUR for node in graph_nx.nodes]
     sizes = [GOAL_SIZE if node == goal or node in shortest_path else V_SIZE
              for node in graph_nx.nodes]
-    # edge_colours = [EDGE_COLOUR if ]
 
     x_edges = []
     y_edges = []
@@ -54,7 +50,7 @@ def smallest_path(goal: str, csv: str) -> Figure:
                     y=y_edges,
                     mode='lines',
                     name='edges',
-                    line=dict(color=EDGE_COLOUR, width=1),
+                    line=dict(color='rgb(0, 0, 0)', width=1),
                     hoverinfo='none',
                     )
     nodes = Scatter(x=x_values,
@@ -74,7 +70,8 @@ def smallest_path(goal: str, csv: str) -> Figure:
     data1 = [edges, nodes]
     fig = Figure(data=data1)
     fig.update_layout(title=f"Graph displaying one of "
-                            f"the shortest paths to {goal} from {start}")
+                            f"the shortest paths to {goal} from "
+                            f"{start} (length: {len(shortest_path)})")
     fig.update_layout({'showlegend': False})
     fig.update_xaxes(showgrid=False, zeroline=False, visible=False)
     fig.update_yaxes(showgrid=False, zeroline=False, visible=False)
@@ -142,10 +139,6 @@ def connectivity_bar_graph() -> Figure:
 
 
 if __name__ == "__main__":
-    # test
-    graph = make_graph('Kevin Bacon', 3, 3)
-    visualize_graph(graph, 'Kevin Bacon', 3, 3)
-    smallest_path('Kevin Bacon', 'graph_data.csv')
     import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 100,

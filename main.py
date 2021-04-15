@@ -73,7 +73,7 @@ app.layout = html.Div([
                         id='bar-graph',
                         figure=visualize_graph(graph, GOAL, LIMIT, DEPTH)
                     ),
-                ], style={"maxHeight": "800px", "overflow": "scroll"})
+                ], style={"maxWidth": "800px", "maxHeight": "800px", "overflow": "scroll"})
             )
         ]
     )
@@ -85,7 +85,8 @@ app.layout = html.Div([
 def update_fig(n_clicks) -> any:
     """Update the graph by selecting a new random article to show the shortest path
     """
-    return smallest_path(GOAL, CSV_NAME)
+    if n_clicks > -1:
+        return smallest_path(GOAL, CSV_NAME)
 
 
 if __name__ == '__main__':
