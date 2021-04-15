@@ -8,7 +8,7 @@ from plotly.graph_objs import Figure, Scatter
 
 from graph import Graph, make_graph
 import random
-from processing import bfs2
+from processing import bfs_record, read_csv_data, create_wiki_graph
 
 GOAL_COLOUR = 'rgb(255, 0, 0)'
 V_COLOUR = 'rgb(0, 0, 255)'
@@ -18,13 +18,21 @@ V_SIZE = 10
 
 
 # Show smallest paths
-def smallest_paths(g: Graph, goal: str) -> None:
+def smallest_paths(goal: str, csv: str) -> Figure:
     """Display a visual of the smallest paths to kevin bacon from a random wikipedia
     article
     """
-    random_article = random.choice([v for v in g.get_all_vertices()])
-    path = bfs2(g, random_article, g.get_vertex(goal))
-    print(path)  # bfs2 doesnt work?
+    data = read_csv_data(csv)
+    g = create_wiki_graph(data)
+    nx_graph = g.to_networkx()
+
+    start = random.choice([v for v in g.get_all_vertices()])
+    shortest_path = bfs_record(g, start, target=goal)
+
+    fig = ...
+
+    fig.show()
+    return fig
 
 
 # Show whole graph
@@ -81,7 +89,7 @@ def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     return fig
 
 
-def connectivity_bar_graph() -> None:
+def connectivity_bar_graph() -> Figure:
     """Display a bar graph with the widespread connections data
     """
 
@@ -90,7 +98,7 @@ if __name__ == "__main__":
     # test
     graph = make_graph('Kevin Bacon', 3, 3)
     visualize_graph(graph, 'Kevin Bacon', 3, 3)
-    # smallest_paths(graph)
+    smallest_paths('Kevin Bacon', 'graph_data.csv')
     import python_ta
     # python_ta.check_all(config={
     #     'max-line-length': 100,

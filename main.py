@@ -11,7 +11,7 @@ This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from graph import make_graph
+from graph import make_graph, make_graph_csv
 from visualizations import visualize_graph
 
 # CONSTANTS
@@ -21,6 +21,8 @@ DEPTH = 3  # Max depth for the article connections
 
 # CREATE THE GRAPH
 graph = make_graph(GOAL, LIMIT, DEPTH)
+# WRITE GRAPH TO FILE
+make_graph_csv(graph)
 
 # FRONT-END
 external_stylesheets = [
@@ -56,6 +58,9 @@ app.layout = html.Div([
     )
 
 ])
+
+# update graph function (button on click will generate a new shortest path graph with a new
+# random start point)
 
 if __name__ == '__main__':
     app.run_server(debug=True, use_reloader=False)

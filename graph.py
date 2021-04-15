@@ -118,6 +118,9 @@ class Graph:
 
     def get_vertex(self, goal: Any):
         """Return the specified vertex object
+
+        Preconditions:
+            - goal in self._vertices
         """
         return self._vertices[goal]
 
@@ -125,6 +128,11 @@ class Graph:
 # Graph construction functions
 def make_graph(goal: str, limit: int, depth: int) -> Graph:
     """Create a graph with the connections to the goal
+
+    Preconditions:
+        - goal > 0
+        - limit > 0
+        - depth > 0
     """
     print('Creating Graph...')
     g = Graph()
