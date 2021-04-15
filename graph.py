@@ -1,5 +1,8 @@
-"""
-Graph Class Implementation and construction functions
+"""CSC111 Winter 2021 Final Project: Graph
+
+Implementation of the Vertex and Graph classes with related methods, adapted from
+class content with minor alterations. Also contains some construction functions.
+Necessary for our adaptation of wikipedia.
 
 This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 """
@@ -97,7 +100,7 @@ class Graph:
     def get_all_vertices(self) -> set:
         """Return a set of all vertex items in this graph.
         """
-        return set(self._vertices.keys())
+        return list(self._vertices.keys())
 
     def to_networkx(self) -> nx.Graph:
         """Convert the graph into an nx.graph object to use
