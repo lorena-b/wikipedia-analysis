@@ -7,7 +7,7 @@ visual demonstration.
 This file is Copyright (c) 2021 Aidan Ryan, Lorena Buciu, Kevin Yang, Kuan-Lin Kuo.
 """
 from processing import paths_by_min_connections
-from visualizations import connectivity_bar_graph, run_dash_app
+from visualization import connectivity_bar_graph, run_dash_app
 
 
 def six_degrees(filepath: str = 'graph_data.csv', depth_cap: int = 6,
@@ -27,14 +27,10 @@ def six_degrees(filepath: str = 'graph_data.csv', depth_cap: int = 6,
         - analysis_type in {'random', 'full'}
         - depth_cap > 0
         - filepath is the path to a CSV file containing wikipedia article and connection using the
-        same format as the data in data/Wikipedia_test_data.csv.
+        same format as the data in graph_data.csv.
     """
     if analysis_type == 'random':
         run_dash_app(filepath, depth_cap, target)
     else:  # analysis_type == 'full'
         paths = paths_by_min_connections()
         connectivity_bar_graph(paths).show()
-
-
-if __name__ == '__main__':
-    six_degrees(filepath='graph_data.csv', analysis_type='random')
