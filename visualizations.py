@@ -258,7 +258,7 @@ def run_dash_app(file: str, depth_cap: int, target: str) -> None:
                         dcc.Graph(
                             id='right-top-graph',
                             style={'width': '90vh', 'height': '80vh'},
-                            figure=visualize_graph(graph, target, LIMIT, depth_cap)
+                            figure=visualize_graph(graph, target, LIMIT)
                         ),
                     ])
                 ),
