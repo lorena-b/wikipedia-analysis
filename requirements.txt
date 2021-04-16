@@ -9,6 +9,7 @@ python-ta~=1.6.3
 plotly~=4.14.1
 networkx~=2.5
 dash~=1.20.0
+numpy
 
 # Data scraping
 requests~=2.25.1
