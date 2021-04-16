@@ -20,11 +20,13 @@ V_SIZE = 10
 
 # Show smallest path
 def smallest_path(goal: str, csv: str) -> Figure:
-    """Display a visual of the smallest path to kevin bacon from a random wikipedia
-    article
+    """Display a visual of the smallest path to a goal article from a random wikipedia
+    article.
+    The csv argument represents the filepath of a .csv dataset in the same format as
+    data/Wikipedia_test_data.csv.
     
     Preconditions:
-        - goal in csv
+        - The goal article is an article in the dataset specified by the csv filepath
     """
     data = read_csv_data(csv)
     g = create_wiki_graph(data)
@@ -144,9 +146,35 @@ def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     return fig
 
 
-def connectivity_bar_graph() -> Figure:
-    """Display a bar graph with the widespread connections data
+def connectivity_bar_graph(paths: dict[int, list[list[str]]]) -> Figure:
+    """Returns a bar graph comparing the minimum number of connections required (to connect
+    a start article to the target) and the number of starting articles that require that
+    minimum amount.
     """
+    fig = Figure()
+    x, y = list(paths.keys()), axis_calculator(paths)
+
+    custom_scale = [[0, "rgb(255, 229, 54)"],
+                    [0.25, "rgb(255, 195, 54)"],
+                    [0.5, "rgb(255, 168, 54)"],
+                    [1.0, "rgb(255, 135, 54)"]]
+
+    fig.add_trace(Bar(x=x, y=y, marker=dict(color=y, colorscale=custom_scale)))
+
+    fig.update_layout(title='Full Analysis of Wikipedia Connectivity to Target',
+                      xaxis_title='Minimum Number of Required Connections',
+                      yaxis_title='Number of Articles')
+
+    return fig
+
+
+def axis_calculator(paths: dict[int, list[list[str]]]) -> list[int]:
+    """Returns list containing axis values for bar graph, based on the number of articles
+    being connected to the target in a certain minimum number of connections."""
+    axis_values = []
+    for path_group in paths.values():
+        axis_values.append(len(path_group))
+    return axis_values
 
 
 if __name__ == "__main__":
