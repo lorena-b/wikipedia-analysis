@@ -133,7 +133,6 @@ def make_graph(goal: str, limit: int, depth: int) -> Graph:
     """Create a graph with the connections to the goal
 
     Preconditions:
-        - goal > 0
         - limit > 0
         - depth > 0
     """
