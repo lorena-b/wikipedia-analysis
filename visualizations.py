@@ -152,7 +152,7 @@ def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     data1 = [edges, nodes]
     fig = Figure(data=data1)
     fig.update_layout(title=f"Graph displaying "
-                            f"the connections to {goal} (limit: {limit}, depth: {depth})")
+                            f"the connections to {goal} (limit: {limit}, depth: {DEPTH})")
     fig.update_layout({'showlegend': False})
     fig.update_xaxes(showgrid=False, zeroline=False, visible=False)
     fig.update_yaxes(showgrid=False, zeroline=False, visible=False)
@@ -211,7 +211,7 @@ def hovertext_formatter(paths: dict[int, list[list[str]]]) -> list[str]:
 def run_dash_app(file: str, depth_cap: int, target: str) -> None:
     """Run the Dash application for generating a random article, finding the shortest path
     to the target, and visualizing that result for the user.
-    
+
     Preconditions:
         - filepath is the path to a CSV file containing wikipedia article and connection using the
         same format as the data in data/Wikipedia_test_data.csv.
