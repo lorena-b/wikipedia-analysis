@@ -22,6 +22,9 @@ V_SIZE = 10
 def smallest_path(goal: str, csv: str) -> Figure:
     """Display a visual of the smallest path to kevin bacon from a random wikipedia
     article
+    
+    Preconditions:
+        - goal in csv
     """
     data = read_csv_data(csv)
     g = create_wiki_graph(data)
