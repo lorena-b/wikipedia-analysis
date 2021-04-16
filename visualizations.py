@@ -1,7 +1,5 @@
 """CSC111 Winter 2021 Final Project: Data Visualization and Dash App
-
 This file contains any code needed to visualize the formatted and processed data.
-
 This file is Copyright (c) 2021 Aidan Ryan, Lorena Buciu, Kevin Yang, Kuan-Lin Kuo.
 """
 import random
@@ -33,7 +31,6 @@ def smallest_path(goal: str, csv: str) -> Figure:
     article.
     The csv argument represents the filepath of a .csv dataset in the same format as
     data/Wikipedia_test_data.csv.
-
     Preconditions:
         - The goal article is an article in the dataset specified by the csv filepath
     """
@@ -110,7 +107,6 @@ def smallest_path(goal: str, csv: str) -> Figure:
 def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     """Display the graph showing the article links
     Adapted from A3.
-
     Preconditions:
         - limit > 0
         - depth > 0
@@ -287,7 +283,9 @@ if __name__ == "__main__":
     python_ta.check_all(config={
         'max-line-length': 100,
         'max-nested-blocks': 4,
-        'disable': ['E1136'],
-        'extra-imports': ['networkx', 'plotly.graph_objs', 'graph', 'random', 'processing'],
+        'disable': ['E1136', 'R0914', 'E9998', 'W0612'],
+        'extra-imports': ['networkx', 'plotly.graph_objs', 'graph', 'random', 'processing',
+                          'dash', 'dash_core_components', 'dash_html_components',
+                          'dash.dependencies'],
         'allowed-io': []
     })
