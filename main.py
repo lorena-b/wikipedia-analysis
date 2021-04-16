@@ -1,15 +1,13 @@
-"""
-CSC111 Final Project - Analyzing Wikipedia Connectivity to Kevin Bacon
+"""CSC111 Winter 2021 Final Project: Main Execution
 
-This is the main module, it will:
-    - Create the network graph
-    - Perform computations on the graph
-    - Produce a Dash webpage output of the visualizations
+This file culminates all previous work into a single function with customizability
+parameters, allowing the user to analyze data in a number of outlined ways through
+visual demonstration.
 
-This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
+This file is Copyright (c) 2021 Aidan Ryan, Lorena Buciu, Kevin Yang, Kuan-Lin Kuo.
 """
-from processing import create_wiki_graph, read_csv_data
-from visualizations import connectivity_bar_graph, run_dash_app
+from processing import paths_by_min_connections
+from visualization import connectivity_bar_graph, run_dash_app
 
 
 def six_degrees(filepath: str = 'data/Wikipedia_test_data.csv', depth_cap: int = 6,
@@ -21,7 +19,8 @@ def six_degrees(filepath: str = 'data/Wikipedia_test_data.csv', depth_cap: int =
             - 'random' = Randomly choose a vertex as the starting point to connect to target
             - 'full' = Uses all vertices in graph to analyse widespread connectivity to target.
                        The runtime for this will be significantly longer!
-    There is a lot of possible experimentation here!
+    There is a lot of possible experimentation here! Please, see the final report for more
+    specific details.
 
     Preconditions
         - target in graph.get_all_vertices()
@@ -30,17 +29,8 @@ def six_degrees(filepath: str = 'data/Wikipedia_test_data.csv', depth_cap: int =
         - filepath is the path to a CSV file containing wikipedia article and connection using the
           same format as the data in data/Wikipedia_test_data.csv.
     """
-    wiki = create_wiki_graph(read_csv_data(filepath))
-    articles = wiki.get_all_vertices()
-
     if analysis_type == 'random':
         run_dash_app(filepath, depth_cap, target)
     else:  # analysis_type == 'full'
-        paths = {}
-        for i in range(len(articles)):
-            ...
-        connectivity_bar_graph(paths)
-
-
-if __name__ == '__main__':
-    six_degrees(filepath='graph_data.csv', analysis_type='random')
+        paths = paths_by_min_connections()
+        connectivity_bar_graph(paths).show()
