@@ -32,6 +32,8 @@ def smallest_path(goal: str, csv: str) -> Figure:
     The csv argument represents the filepath of a .csv dataset in the same format as
     data/Wikipedia_test_data.csv.
     Preconditions:
+        - csv is the path to a CSV file containing wikipedia article and connection using the
+        same format as the data in graph_data.csv.
         - The goal article is an article in the dataset specified by the csv filepath
     """
     data = read_csv_data(csv)
@@ -152,7 +154,7 @@ def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     data1 = [edges, nodes]
     fig = Figure(data=data1)
     fig.update_layout(title=f"Graph displaying "
-                            f"the connections to {goal} (limit: {limit}, depth: {DEPTH})")
+                            f"the connections to {goal} (limit: {limit}, depth: {depth})")
     fig.update_layout({'showlegend': False})
     fig.update_xaxes(showgrid=False, zeroline=False, visible=False)
     fig.update_yaxes(showgrid=False, zeroline=False, visible=False)
@@ -214,7 +216,7 @@ def run_dash_app(file: str, depth_cap: int, target: str) -> None:
 
     Preconditions:
         - filepath is the path to a CSV file containing wikipedia article and connection using the
-        same format as the data in data/Wikipedia_test_data.csv.
+        same format as the data in graph_data.csv.
         - there are no duplicate article names in the first header column (article titles) of the
         dataset.
         - depth_cap > 0
