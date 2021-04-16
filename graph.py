@@ -1,9 +1,7 @@
 """CSC111 Winter 2021 Final Project: Graph
-
 Implementation of the Vertex and Graph classes with related methods, adapted from
 class content with minor alterations. Also contains some construction functions.
 Necessary for our adaptation of wikipedia.
-
 This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 """
 from __future__ import annotations
@@ -75,7 +73,6 @@ class Graph:
 
     def adjacent(self, item1: Any, item2: Any) -> bool:
         """Return whether item1 and item2 are adjacent vertices in this graph.
-
         Return False if item1 or item2 do not appear as vertices in this graph.
         """
         if item1 in self._vertices and item2 in self._vertices:
@@ -86,9 +83,7 @@ class Graph:
 
     def get_neighbours(self, item: Any) -> set:
         """Return a set of the neighbours of the given item.
-
         Note that the *items* are returned, not the _Vertex objects themselves.
-
         Raise a ValueError if item does not appear as a vertex in this graph.
         """
         if item in self._vertices:
@@ -119,9 +114,9 @@ class Graph:
 
         return nx_graph
 
-    def get_vertex(self, goal: Any):
-        """Return the specified vertex object
-
+    def get_vertex(self, goal: Any) -> _Vertex:
+        """Return the specified vertex object.
+        
         Preconditions:
             - goal in self._vertices
         """
@@ -130,8 +125,8 @@ class Graph:
 
 # Graph construction functions
 def make_graph(goal: str, limit: int, depth: int) -> Graph:
-    """Create a graph with the connections to the goal
-
+    """Create a graph with the connections to the goal article.
+    
     Preconditions:
         - limit > 0
         - depth > 0
@@ -148,8 +143,8 @@ def make_graph(goal: str, limit: int, depth: int) -> Graph:
 
 
 def extend(graph: Graph, d: int, link: str, link_list: list, limit: int) -> None:
-    """Extend the graph up to a max connection depth of d
-    
+    """Extend the graph up to a max connection depth of d.
+
     Preconditions:
         - d > 0
         - limit > 0
@@ -167,7 +162,7 @@ def extend(graph: Graph, d: int, link: str, link_list: list, limit: int) -> None
 
 
 def make_graph_csv(graph: Graph) -> None:
-    """Make a csv file for the graph
+    """Make a csv file for the graph.
     """
     vertices = graph.get_all_vertices()
     with open('graph_data.csv', 'w', newline='') as file:
@@ -182,7 +177,7 @@ def make_graph_csv(graph: Graph) -> None:
             writer.writerow([page] + [data])
 
     replace = open('graph_data.csv', 'r')
-    replace = ''.join([i for i in replace]).replace('.', '')
+    replace = ''.join(list(replace)).replace('.', '')
     x = open('graph_data.csv', 'w')
     x.writelines(replace)
     x.close()
@@ -190,10 +185,10 @@ def make_graph_csv(graph: Graph) -> None:
 
 if __name__ == "__main__":
     import python_ta
-    # python_ta.check_all(config={
-    #     'max-line-length': 100,
-    #     'max-nested-blocks': 4,
-    #     'disable': ['E1136'],
-    #     'extra-imports': [],
-    #     'allowed-io': []
-    # })
+    python_ta.check_all(config={
+        'max-line-length': 100,
+        'max-nested-blocks': 4,
+        'disable': ['E1136', 'E9998'],
+        'extra-imports': ['csv', 'networkx', 'data'],
+        'allowed-io': []
+    })
