@@ -10,6 +10,9 @@ from bs4 import BeautifulSoup
 
 def get_direct_links_csv(goal: str, limit: int) -> None:
     """Find all the articles that directly link to the goal article
+    
+    Preconditions:
+        - limit > 0
     """
     response = requests.get(
         # Use the backlinks route
@@ -35,6 +38,9 @@ def get_direct_links_csv(goal: str, limit: int) -> None:
 
 def get_direct_links(goal: str, limit: int) -> list:
     """Find all the articles that directly link to the goal article
+    
+    Preconditions:
+        - limit > 0
     """
     response = requests.get(
         # Use the backlinks route
