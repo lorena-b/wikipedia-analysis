@@ -41,6 +41,13 @@ def smallest_path(goal: str, csv: str) -> Figure:
 
     shortest_path = bfs_record(g, start, target=goal)
 
+    if shortest_path == []:  # this is only returned by bfs_record() if no path is found
+        print('No path found between ' + start + ' and ' + goal +
+              ' with the chosen depth cap.')
+    else:
+        print('A path was found between ' + start + ' and ' + goal +
+              ' with the chosen depth cap!')
+
     x_values = [pos[k][0] for k in graph_nx.nodes]
     y_values = [pos[k][1] for k in graph_nx.nodes]
     labels = list(graph_nx.nodes)
@@ -164,7 +171,7 @@ def connectivity_bar_graph(paths: dict[int, list[list[str]]]) -> Figure:
     fig.update_layout(title='Full Analysis of Wikipedia Connectivity to Target',
                       xaxis_title='Minimum Number of Required Connections',
                       yaxis_title='Number of Articles')
-
+    fig.show()
     return fig
 
 
