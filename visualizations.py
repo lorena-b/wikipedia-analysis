@@ -8,15 +8,13 @@ import random
 import networkx as nx
 from plotly.graph_objs import Figure, Scatter, Bar
 
-from graph import Graph
-from processing import bfs_record, read_csv_data, create_wiki_graph
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
-from graph import make_graph, make_graph_csv
+from processing import bfs_record, read_csv_data, create_wiki_graph
+from graph import make_graph, make_graph_csv, Graph
 
 # CONSTANTS
 GOAL_COLOUR = 'rgb(255, 135, 54)'
@@ -53,12 +51,12 @@ def smallest_path(goal: str, csv: str) -> Figure:
     shortest_path = bfs_record(g, start, target=goal)
 
     if shortest_path == []:  # this is only returned by bfs_record() if no path is found
-        print('No path found between ' + start + ' and ' + goal +
-              ' with the chosen depth cap.')
+        print('No path found between ' + start + ' and ' + goal
+              + ' with the chosen depth cap.')
         title = f"No path found with the chosen depth cap to {goal} from {start}"
     else:
-        print('A path was found between ' + start + ' and ' + goal +
-              ' with the chosen depth cap!')
+        print('A path was found between ' + start + ' and ' + goal
+              + ' with the chosen depth cap!')
         title = f"Graph displaying one of the shortest paths to {goal} from " \
                 f"{start} (length: {len(shortest_path)})"
 
@@ -273,11 +271,13 @@ def run_dash_app(file: str, depth_cap: int, target: str) -> None:
     ])
 
     @app.callback(Output('smallest-graph', 'figure'), [Input('button', 'n_clicks')])
-    def update_fig(n_clicks) -> any:
+    def update_fig(n_clicks: int) -> any:
         """Update the graph by selecting a new random article to show the shortest path
         """
         if n_clicks > -1:
             return smallest_path(target, file)
+
+        return None
 
     app.run_server(debug=True, use_reloader=False)
 
