@@ -106,7 +106,7 @@ def smallest_path(goal: str, csv: str) -> Figure:
 
 
 # Show whole graph, only used for testing
-def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
+def visualize_graph(g: Graph, goal: str, limit: int) -> Figure:
     """Display the graph showing the article links
     Adapted from A3.
     Preconditions:
