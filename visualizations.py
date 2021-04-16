@@ -154,7 +154,7 @@ def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     data1 = [edges, nodes]
     fig = Figure(data=data1)
     fig.update_layout(title=f"Graph displaying "
-                            f"the connections to {goal} (limit: {limit}, depth: {depth})")
+                            f"the connections to {goal} (limit: {limit}, depth: {DEPTH})")
     fig.update_layout({'showlegend': False})
     fig.update_xaxes(showgrid=False, zeroline=False, visible=False)
     fig.update_yaxes(showgrid=False, zeroline=False, visible=False)
