@@ -21,7 +21,7 @@ def read_csv_data(filepath: str) -> dict[str, list[str]]:
 
     Preconditions:
         - filepath is the path to a CSV file containing wikipedia article and connection using the
-        same format as the data in data/Wikipedia_test_data.csv.
+        same format as the data in graph_data.csv.
         - there are no duplicate article names in the first header column (article titles) of the
         dataset.
     """
@@ -93,7 +93,7 @@ def paths_by_min_connections(filepath: str = 'graph_data.csv',
 
     Preconditions:
         - filepath is the path to a CSV file containing wikipedia article and connection using the
-        same format as the data in data/Wikipedia_test_data.csv.
+        same format as the data in graph_data.csv.
         - there are no duplicate article names in the first header column (article titles) of the
         dataset.
         - depth_cap > 0
