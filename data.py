@@ -1,23 +1,24 @@
-"""
-File for scraping wikipedia data to retrieve the articles directly linked to the goal article
+"""CSC111 Winter 2021 Final Project: Data Collection
+
+This file contains functions for scraping wikipedia to obtain data.
 
 This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 """
-import requests
 import csv
+import requests
 from bs4 import BeautifulSoup
 
 
 def get_direct_links_csv(goal: str, limit: int) -> None:
-    """Find all the articles that directly link to the goal article
-    
+    """Find all the articles that directly link to the goal article.
+
     Preconditions:
         - limit > 0
     """
     response = requests.get(
         # Use the backlinks route
-        url='https://en.wikipedia.org/w/index.php?title=Special%3AWhatLinksHere&' +
-            'limit=' + str(limit) + '&target=' + goal + '&namespace='
+        url='https://en.wikipedia.org/w/index.php?title=Special%3AWhatLinksHere&' + 'limit='
+        + str(limit) + '&target=' + goal + '&namespace='
     )
     print(response.status_code)
 
@@ -37,15 +38,15 @@ def get_direct_links_csv(goal: str, limit: int) -> None:
 
 
 def get_direct_links(goal: str, limit: int) -> list:
-    """Find all the articles that directly link to the goal article
-    
+    """Find all the articles that directly link to the goal article.
+
     Preconditions:
         - limit > 0
     """
     response = requests.get(
         # Use the backlinks route
-        url='https://en.wikipedia.org/w/index.php?title=Special%3AWhatLinksHere&' +
-            'limit=' + str(limit) + '&target=' + goal + '&namespace='
+        url='https://en.wikipedia.org/w/index.php?title=Special%3AWhatLinksHere&' + 'limit='
+        + str(limit) + '&target=' + goal + '&namespace='
     )
     # print(response.status_code)
 
@@ -64,3 +65,14 @@ def get_direct_links(goal: str, limit: int) -> list:
             data.append(link.text)
 
     return data
+
+
+if __name__ == "__main__":
+    import python_ta
+    python_ta.check_all(config={
+        'max-line-length': 100,
+        'max-nested-blocks': 4,
+        'disable': ['E1136', 'E9998'],
+        'extra-imports': ['csv', 'requests', 'bs4'],
+        'allowed-io': []
+    })
