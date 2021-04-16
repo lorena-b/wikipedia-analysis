@@ -6,7 +6,7 @@ This file is Copyright (c) 2021 Aidan Ryan, Lorena Buciu, Kevin Yang, Kuan-Lin K
 """
 import random
 import networkx as nx
-from plotly.graph_objs import Figure, Scatter
+from plotly.graph_objs import Bar, Figure, Scatter
 
 from graph import Graph
 from processing import bfs_record, read_csv_data, create_wiki_graph
@@ -24,7 +24,7 @@ def smallest_path(goal: str, csv: str) -> Figure:
     article.
     The csv argument represents the filepath of a .csv dataset in the same format as
     data/Wikipedia_test_data.csv.
-    
+
     Preconditions:
         - The goal article is an article in the dataset specified by the csv filepath
     """
