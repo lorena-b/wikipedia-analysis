@@ -6,13 +6,13 @@ This file is Copyright (c) 2021 Aidan Ryan, Lorena Buciu, Kevin Yang, Kuan-Lin K
 """
 import random
 import networkx as nx
-from plotly.graph_objs import Bar, Figure, Scatter
+from plotly.graph_objs import Figure, Scatter, Bar
 
 from graph import Graph
 from processing import bfs_record, read_csv_data, create_wiki_graph
 
-GOAL_COLOUR = 'rgb(255, 0, 0)'
-V_COLOUR = 'rgb(0, 0, 255)'
+GOAL_COLOUR = 'rgb(255, 135, 54)'
+V_COLOUR = 'rgb(22, 163, 245)'
 
 GOAL_SIZE = 15
 V_SIZE = 10

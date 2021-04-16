@@ -150,6 +150,10 @@ def make_graph(goal: str, limit: int, depth: int) -> Graph:
 
 def extend(graph: Graph, d: int, link: str, link_list: list, limit: int) -> None:
     """Extend the graph up to a max connection depth of d
+    
+    Preconditions:
+        - d > 0
+        - limit > 0
     """
     if d == 0:
         pass
