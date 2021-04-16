@@ -44,9 +44,12 @@ def smallest_path(goal: str, csv: str) -> Figure:
     if shortest_path == []:  # this is only returned by bfs_record() if no path is found
         print('No path found between ' + start + ' and ' + goal +
               ' with the chosen depth cap.')
+        title = f"No path found with the chosen depth cap to {goal} from {start}"
     else:
         print('A path was found between ' + start + ' and ' + goal +
               ' with the chosen depth cap!')
+        title = f"Graph displaying one of the shortest paths to {goal} from " \
+                f"{start} (length: {len(shortest_path)})"
 
     x_values = [pos[k][0] for k in graph_nx.nodes]
     y_values = [pos[k][1] for k in graph_nx.nodes]
@@ -85,9 +88,7 @@ def smallest_path(goal: str, csv: str) -> Figure:
 
     data1 = [edges, nodes]
     fig = Figure(data=data1)
-    fig.update_layout(title=f"Graph displaying one of "
-                            f"the shortest paths to {goal} from "
-                            f"{start} (length: {len(shortest_path)})")
+    fig.update_layout(title=title)
     fig.update_layout({'showlegend': False})
     fig.update_xaxes(showgrid=False, zeroline=False, visible=False)
     fig.update_yaxes(showgrid=False, zeroline=False, visible=False)

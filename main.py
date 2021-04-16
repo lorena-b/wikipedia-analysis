@@ -35,7 +35,7 @@ def six_degrees(filepath: str = 'data/Wikipedia_test_data.csv', depth_cap: int =
     articles = wiki.get_all_vertices()
 
     if analysis_type == 'random':
-        run_dash_app()
+        run_dash_app(filepath, depth_cap, target)
     else:  # analysis_type == 'full'
         paths = {}
         for i in range(len(articles)):
@@ -44,4 +44,4 @@ def six_degrees(filepath: str = 'data/Wikipedia_test_data.csv', depth_cap: int =
 
 
 if __name__ == '__main__':
-    six_degrees(filepath='graph_data.csv', analysis_type='full')
+    six_degrees(filepath='graph_data.csv', analysis_type='random')
