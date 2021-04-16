@@ -155,7 +155,7 @@ def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     return fig
 
 
-def connectivity_bar_graph(paths: dict[int, list[list[str]]]) -> Figure:
+def connectivity_bar_graph(paths: dict[int, list[list[str]]]) -> None:
     """Returns a bar graph comparing the minimum number of connections required (to connect
     a start article to the target) and the number of starting articles that require that
     minimum amount.
@@ -173,8 +173,8 @@ def connectivity_bar_graph(paths: dict[int, list[list[str]]]) -> Figure:
     fig.update_layout(title='Full Analysis of Wikipedia Connectivity to Target',
                       xaxis_title='Minimum Number of Required Connections',
                       yaxis_title='Number of Articles')
+
     fig.show()
-    return fig
 
 
 def axis_calculator(paths: dict[int, list[list[str]]]) -> list[int]:
