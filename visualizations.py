@@ -155,26 +155,28 @@ def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     return fig
 
 
-def connectivity_bar_graph(paths: dict[int, list[list[str]]]) -> None:
+def connectivity_bar_graph(paths: dict[int, list[list[str]]]) -> Figure:
     """Returns a bar graph comparing the minimum number of connections required (to connect
     a start article to the target) and the number of starting articles that require that
     minimum amount.
     """
     fig = Figure()
     x, y = list(paths.keys()), axis_calculator(paths)
+    hovertext = hovertext_formatter(paths)
 
     custom_scale = [[0, "rgb(255, 229, 54)"],
                     [0.25, "rgb(255, 195, 54)"],
                     [0.5, "rgb(255, 168, 54)"],
                     [1.0, "rgb(255, 135, 54)"]]
 
-    fig.add_trace(Bar(x=x, y=y, marker=dict(color=y, colorscale=custom_scale)))
+    fig.add_trace(Bar(x=x, y=y, hovertext=hovertext,
+                      marker=dict(color=y, colorscale=custom_scale)))
 
     fig.update_layout(title='Full Analysis of Wikipedia Connectivity to Target',
                       xaxis_title='Minimum Number of Required Connections',
                       yaxis_title='Number of Articles')
 
-    fig.show()
+    return fig
 
 
 def axis_calculator(paths: dict[int, list[list[str]]]) -> list[int]:
@@ -184,6 +186,21 @@ def axis_calculator(paths: dict[int, list[list[str]]]) -> list[int]:
     for path_group in paths.values():
         axis_values.append(len(path_group))
     return axis_values
+
+
+def hovertext_formatter(paths: dict[int, list[list[str]]]) -> list[str]:
+    """Returns list containing hovertext values for the bar graph. This hovertext
+    represents the names of the articles that were able to be connected in a certain
+    bar's minimum required number of connections.
+    """
+    hovertext_values = []
+    for path_group in paths.values():
+        hovertext_string = ''
+        for path in path_group:
+            if path != []:
+                hovertext_string += (path[0] + '<br>')
+        hovertext_values.append(hovertext_string)
+    return hovertext_values
 
 
 if __name__ == "__main__":
