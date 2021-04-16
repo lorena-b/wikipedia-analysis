@@ -9,8 +9,7 @@ This is the main module, it will:
 This file is Copyright (c) 2021 Lorena Buciu, Luke Kuo, Aidan Ryan, Kevin Yang
 """
 from processing import create_wiki_graph, read_csv_data
-from visualizations import connectivity_bar_graph
-from app import run_dash_app
+from visualizations import connectivity_bar_graph, run_dash_app
 
 
 def six_degrees(filepath: str = 'data/Wikipedia_test_data.csv', depth_cap: int = 6,
