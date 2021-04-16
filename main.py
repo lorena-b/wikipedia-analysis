@@ -37,4 +37,6 @@ def six_degrees(filepath: str = 'graph_data.csv', depth_cap: int = 6,
 
 
 if __name__ == '__main__':
+    # Keep only the desired option uncommented
     six_degrees(filepath='graph_data.csv', analysis_type='random')
+    # six_degrees(filepath='graph_data.csv', analysis_type='full')
