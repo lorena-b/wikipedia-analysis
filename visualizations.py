@@ -53,12 +53,12 @@ def smallest_path(goal: str, csv: str) -> Figure:
     if shortest_path == []:  # this is only returned by bfs_record() if no path is found
         print('No path found between ' + start + ' and ' + goal
               + ' with the chosen depth cap.')
-        title = f"No path found with the chosen depth cap to {goal} from {start}"
+        title = f"No path found with the chosen depth cap from {start} to {goal}"
     else:
         print('A path was found between ' + start + ' and ' + goal
               + ' with the chosen depth cap!')
-        title = f"Graph displaying one of the shortest paths to {goal} from " \
-                f"{start} (length: {len(shortest_path)})"
+        title = f"Possible shortest path from {start} to " \
+                f"{goal} (length: {len(shortest_path)})"
 
     x_values = [pos[k][0] for k in graph_nx.nodes]
     y_values = [pos[k][1] for k in graph_nx.nodes]
@@ -235,7 +235,7 @@ def run_dash_app(file: str, depth_cap: int, target: str) -> None:
                     external_stylesheets=external_stylesheets)
 
     app.layout = html.Div([
-        html.H1(children=f"Wikipedia Network Analysis: 6 degrees to {target}",
+        html.H1(children=f"Wikipedia Network Analysis: {depth_cap} degrees to {target}",
                 style={
                     'fontSize': 28,
                     'paddingTop': 20,
@@ -261,7 +261,7 @@ def run_dash_app(file: str, depth_cap: int, target: str) -> None:
                         html.Button('Update Graph', id='button', n_clicks=0),
                         dcc.Graph(
                             id='smallest-graph',
-                            style={'width': '90vh', 'height': '80vh'}
+                            style={'width': '100vh', 'height': '80vh'}
                         ),
                     ], )
                 )
