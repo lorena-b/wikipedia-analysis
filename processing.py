@@ -68,6 +68,9 @@ def bfs_record(graph: Graph, start: str, target: str, depth_cap: int = 6) -> lis
     visited = set()
     path = []
 
+    if start == target:
+        return [start]
+
     while len(path) <= depth_cap and queue:
         article, path = queue.pop(0)
         visited.add(article)
@@ -80,6 +83,23 @@ def bfs_record(graph: Graph, start: str, target: str, depth_cap: int = 6) -> lis
             else:
                 pass
     return []  # occurs when no path is reached before hitting depth cap
+
+
+def paths_by_min_connections(filepath: str = 'data/Wikipedia_test_data.csv',
+                             target: str = 'Kevin Bacon',
+                             depth_cap: int = 6) -> dict[int, list[list[str]]]:
+    """Takes a list of articles"""
+    wiki = create_wiki_graph(read_csv_data(filepath))
+    articles = wiki.get_all_vertices()
+
+    paths = {}
+    for article in articles:
+        path = bfs_record(wiki, article, target, depth_cap)
+        if len(path) not in paths:
+            paths[len(path)] = [path]
+        else:
+            paths[len(path)].append(path)
+    return paths
 
 
 if __name__ == '__main__':
