@@ -21,9 +21,9 @@ def read_csv_data(filepath: str) -> dict[str, list[str]]:
 
     Preconditions:
         - filepath is the path to a CSV file containing wikipedia article and connection using the
-          same format as the data in data/Wikipedia_test_data.csv.
+        same format as the data in data/Wikipedia_test_data.csv.
         - there are no duplicate article names in the first header column (article titles) of the
-          dataset.
+        dataset.
     """
     with open(filepath) as file:
         reader = csv.reader(file)
@@ -85,10 +85,20 @@ def bfs_record(graph: Graph, start: str, target: str, depth_cap: int = 6) -> lis
     return []  # occurs when no path is reached before hitting depth cap
 
 
-def paths_by_min_connections(filepath: str = 'graph_data.csv',
+def paths_by_min_connections(filepath: str = 'data/Wikipedia_test_data.csv',
                              target: str = 'Kevin Bacon',
                              depth_cap: int = 6) -> dict[int, list[list[str]]]:
-    """Takes a list of articles"""
+    """Returns a dictionary mapping the minimum number of required connections (to connect
+    an article to the target article) to the paths that require that number of connections.
+
+    Preconditions:
+        - filepath is the path to a CSV file containing wikipedia article and connection using the
+        same format as the data in data/Wikipedia_test_data.csv.
+        - there are no duplicate article names in the first header column (article titles) of the
+        dataset.
+        - depth_cap > 0
+        - target is representative of an article that is in the dataset found at filepath
+    """
     wiki = create_wiki_graph(read_csv_data(filepath))
     articles = wiki.get_all_vertices()
 
