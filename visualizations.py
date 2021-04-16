@@ -29,7 +29,11 @@ def smallest_path(goal: str, csv: str) -> Figure:
 
     pos = nx.spring_layout(graph_nx)
 
+    # Don't use the goal as the starting node
     start = random.choice(g.get_all_vertices())
+    while start == goal:
+        start = random.choice(g.get_all_vertices())
+
     shortest_path = bfs_record(g, start, target=goal)
 
     x_values = [pos[k][0] for k in graph_nx.nodes]
