@@ -85,7 +85,7 @@ def bfs_record(graph: Graph, start: str, target: str, depth_cap: int = 6) -> lis
     return []  # occurs when no path is reached before hitting depth cap
 
 
-def paths_by_min_connections(filepath: str = 'data/Wikipedia_test_data.csv',
+def paths_by_min_connections(filepath: str = 'graph_data.csv',
                              target: str = 'Kevin Bacon',
                              depth_cap: int = 6) -> dict[int, list[list[str]]]:
     """Takes a list of articles"""
