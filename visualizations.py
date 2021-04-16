@@ -55,7 +55,8 @@ def smallest_path(goal: str, csv: str) -> Figure:
     y_values = [pos[k][1] for k in graph_nx.nodes]
     labels = list(graph_nx.nodes)
 
-    colours = [GOAL_COLOUR if node in shortest_path else V_COLOUR for node in graph_nx.nodes]
+    colours = [GOAL_COLOUR if node in shortest_path
+               else V_COLOUR for node in graph_nx.nodes]
     sizes = [GOAL_SIZE if node == goal or node in shortest_path else V_SIZE
              for node in graph_nx.nodes]
 
