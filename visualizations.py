@@ -152,7 +152,7 @@ def visualize_graph(g: Graph, goal: str, limit: int, depth: int) -> Figure:
     data1 = [edges, nodes]
     fig = Figure(data=data1)
     fig.update_layout(title=f"Graph displaying "
-                            f"the connections to {goal} (limit: {limit}, depth: {DEPTH})")
+                            f"the connections to {goal} (limit: {limit}, depth: {depth})")
     fig.update_layout({'showlegend': False})
     fig.update_xaxes(showgrid=False, zeroline=False, visible=False)
     fig.update_yaxes(showgrid=False, zeroline=False, visible=False)
@@ -209,7 +209,16 @@ def hovertext_formatter(paths: dict[int, list[list[str]]]) -> list[str]:
 
 
 def run_dash_app(file: str, depth_cap: int, target: str) -> None:
-    """Run the Dash application
+    """Run the Dash application for generating a random article, finding the shortest path
+    to the target, and visualizing that result for the user.
+    
+    Preconditions:
+        - filepath is the path to a CSV file containing wikipedia article and connection using the
+        same format as the data in data/Wikipedia_test_data.csv.
+        - there are no duplicate article names in the first header column (article titles) of the
+        dataset.
+        - depth_cap > 0
+        - target is representative of an article that is in the dataset found at filepath
     """
     # CREATE THE GRAPH
     graph = make_graph(target, LIMIT, DEPTH)
@@ -268,8 +277,7 @@ def run_dash_app(file: str, depth_cap: int, target: str) -> None:
 
     @app.callback(Output('smallest-graph', 'figure'), [Input('button', 'n_clicks')])
     def update_fig(n_clicks: int) -> any:
-        """Update the graph by selecting a new random article to show the shortest path
-        """
+        """Update the graph by selecting a new random article to show the shortest path."""
         if n_clicks > -1:
             return smallest_path(target, file)
 
